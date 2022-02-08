@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class ToDo {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(name="TODO_TASK", length=100, nullable=false, unique=false)

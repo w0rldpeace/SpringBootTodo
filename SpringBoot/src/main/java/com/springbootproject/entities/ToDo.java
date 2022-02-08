@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="TODO")
 public class ToDo {
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
@@ -47,5 +48,8 @@ public class ToDo {
     public ToDo(String task, Boolean done){
         this.task = task;
         this.done = done;
+    }
+
+    public ToDo() {
     }
 }

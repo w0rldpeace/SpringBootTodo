@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="TODO")
@@ -19,7 +20,7 @@ public class ToDo {
     private String task;
 
     @Column(name="DONE", nullable = false)
-    private Boolean done;
+    private Boolean done = false;
 
     public Long getId() {
         return id;

@@ -2,12 +2,15 @@ package com.springbootproject.controller;
 
 import java.util.List;
 
+import com.springbootproject.beans.TodoBean;
+import com.springbootproject.dto.CreateTaskDto;
+import com.springbootproject.dto.UpdateTaskDto;
 import com.springbootproject.entities.ToDo;
-import com.springbootproject.repository.ToDoRepository;
-import com.springbootproject.service.ToDoService;
 import com.springbootproject.service.ToDoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/todo")
@@ -15,6 +18,9 @@ public class ToDoController {
 
     @Autowired
     private ToDoServiceImpl toDoService;
+
+    @Autowired
+    private TodoBean modelMapper;
 
     @GetMapping("/{id}")
     public ToDo get(@PathVariable("id") Long id) {
@@ -37,12 +43,13 @@ public class ToDoController {
     }
 
     @PostMapping
-    public ToDo create(@RequestBody ToDo todo) {
+    public ToDo create(@Valid @RequestBody CreateTaskDto todo) {
         return toDoService.create(todo);
     }
 
     @PutMapping
-    public ToDo update(@RequestBody ToDo newTodo) { //Holt den Wert aus RequestBody (Was man in zb. postman sieht unter Body)
+    public ToDo update(@RequestBody UpdateTaskDto newTodo) { //Holt den Wert aus RequestBody (Was man in zb. postman sieht unter Body)
+
         return toDoService.update(newTodo);
     }
 

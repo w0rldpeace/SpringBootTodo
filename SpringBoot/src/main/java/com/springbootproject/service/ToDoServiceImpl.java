@@ -1,11 +1,15 @@
 package com.springbootproject.service;
 
+import com.springbootproject.beans.TodoBean;
+import com.springbootproject.dto.CreateTaskDto;
+import com.springbootproject.dto.UpdateTaskDto;
 import com.springbootproject.entities.ToDo;
 import com.springbootproject.repository.ToDoRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -13,21 +17,29 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Autowired
     private ToDoRepository toDoRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
-    public ToDo create(ToDo todo) {
+    public ToDo create(CreateTaskDto todo) {
 
-        return toDoRepository.save(todo);
+        ToDo t = modelMapper.map(todo, ToDo.class);
+        return toDoRepository.save(t);
     }
 
     @Override
     public ToDo read(Long id) {
+
         return toDoRepository.findById(id).orElse(null);
     }
 
-    public ToDo update(ToDo newTask) {
+    @Override
+    public ToDo update(UpdateTaskDto newTask) {
 
-        return toDoRepository.save(newTask);
+        ToDo old = toDoRepository.findById(newTask.getId()).orElseThrow();
+        modelMapper.map(newTask, old);
+
+        return toDoRepository.save(old);
     }
 
     @Override

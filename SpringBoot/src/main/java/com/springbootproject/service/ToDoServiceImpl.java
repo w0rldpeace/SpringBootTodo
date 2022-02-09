@@ -5,10 +5,11 @@ import com.springbootproject.repository.ToDoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ToDoServiceImpl implements ToDoService{
+public class ToDoServiceImpl implements ToDoService {
 
     @Autowired
     private ToDoRepository toDoRepository;
@@ -16,7 +17,7 @@ public class ToDoServiceImpl implements ToDoService{
     @Override
     public ToDo create(ToDo todo) {
 
-       return toDoRepository.save(todo);
+        return toDoRepository.save(todo);
     }
 
     @Override
@@ -42,22 +43,23 @@ public class ToDoServiceImpl implements ToDoService{
     @Override
     public List<ToDo> readAllDone() {
 
-        return (List<ToDo>) toDoRepository.findAll();
+        return toDoRepository.findByDoneTrue();
     }
 
     @Override
     public List<ToDo> readAllTodo() {
-        return (List<ToDo>) toDoRepository.findAll();
+
+        return toDoRepository.findByDoneFalse();
     }
 
     @Override
     public Long countDone() {
 
-        return toDoRepository.count();
+        return toDoRepository.countByDone(true);
     }
 
     @Override
     public Long countTodo() {
-        return toDoRepository.count();
+        return toDoRepository.countByDone(false);
     }
 }

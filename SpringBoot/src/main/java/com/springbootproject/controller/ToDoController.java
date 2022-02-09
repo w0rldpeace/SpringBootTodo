@@ -17,32 +17,48 @@ public class ToDoController {
     private ToDoServiceImpl toDoService;
 
     @GetMapping("/{id}")
-    public ToDo get(@PathVariable("id") Long id){
+    public ToDo get(@PathVariable("id") Long id) {
         return toDoService.read(id);
     }
 
-    @GetMapping
-    public List<ToDo> getAllTodo(){
+    @GetMapping("/done")
+    public List<ToDo> getAllDone() {
+        return toDoService.readAllDone();
+    }
+
+    @GetMapping("/undone")
+    public List<ToDo> getAllTodo() {
         return toDoService.readAllTodo();
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id){
+    public void delete(@PathVariable("id") Long id) {
         toDoService.delete(id);
     }
 
-    @PostMapping // create
-    public ToDo create(@RequestBody ToDo todo){
+    @PostMapping
+    public ToDo create(@RequestBody ToDo todo) {
         return toDoService.create(todo);
     }
 
-    //Frage zum Update
-    @PutMapping //update
-    public ToDo update(@RequestBody ToDo newTodo){
+    @PutMapping
+    public ToDo update(@RequestBody ToDo newTodo) { //Holt den Wert aus RequestBody (Was man in zb. postman sieht unter Body)
         return toDoService.update(newTodo);
     }
 
-    public ToDoController(){
+    @GetMapping("/done/count")
+    public Long countDone() {
+
+        return toDoService.countDone();
+    }
+
+    @GetMapping("/undone/count")
+    public Long countTodo() {
+
+        return toDoService.countTodo();
+    }
+
+    public ToDoController() {
 
     }
 }

@@ -19,17 +19,17 @@ public class ToDo {
     private String task;
 
     @Column(name="DONE", nullable = false)
-    private boolean done;
+    private Boolean done;
 
     public Long getId() {
         return id;
     }
 
-    public boolean isDone() {
+    public Boolean isDone() {
         return done;
     }
 
-    public void setDone(boolean done) {
+    public void setDone(Boolean done) {
         this.done = done;
     }
 

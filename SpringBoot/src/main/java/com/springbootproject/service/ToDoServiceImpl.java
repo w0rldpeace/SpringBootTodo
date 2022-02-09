@@ -30,7 +30,9 @@ public class ToDoServiceImpl implements ToDoService {
     @Override
     public ToDo read(Long id) {
 
-        return toDoRepository.findById(id).orElse(null);
+        return toDoRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Bruh!")
+        );
     }
 
     @Override

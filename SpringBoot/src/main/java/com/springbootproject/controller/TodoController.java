@@ -54,7 +54,7 @@ public class TodoController {
         return ResponseEntity.created(location).build();
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateTodo(@Valid @RequestBody TodoUpdateRequest todoUpdateRequest){
         Todo todo = new Todo();
         todo.setDescription(todoUpdateRequest.getDescription());

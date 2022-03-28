@@ -6,11 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="TODO")
-public class ToDo {
+public class Todo {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -46,11 +45,14 @@ public class ToDo {
         this.task = task;
     }
 
-    public ToDo(String task, Boolean done){
+    public Todo(String task, Boolean done){
         this.task = task;
         this.done = done;
     }
 
-    public ToDo() {
+    public Todo() {
+    }
+
+    public void setDescription(String description) {
     }
 }

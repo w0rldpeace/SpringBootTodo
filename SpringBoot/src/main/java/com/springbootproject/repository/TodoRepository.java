@@ -1,6 +1,6 @@
 package com.springbootproject.repository;
 
-import com.springbootproject.entities.ToDo;
+import com.springbootproject.entities.Todo;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ToDoRepository extends CrudRepository<ToDo, Long>{
+public interface TodoRepository extends CrudRepository<Todo, Long>{
 
-    List<ToDo> findByDoneTrue();
-    List<ToDo> findByDoneFalse();
+    List<Todo> findByDoneTrue();
+    List<Todo> findByDoneFalse();
     Long countByDone(Boolean state);
 
 }

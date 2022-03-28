@@ -1,9 +1,8 @@
 package com.springbootproject;
-import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.springbootproject.entities.ToDo;
-import com.springbootproject.repository.ToDoRepository;
+import com.springbootproject.entities.Todo;
+import com.springbootproject.repository.TodoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -12,10 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class Dbfiller implements CommandLineRunner{
 
-    private ToDoRepository todorepository;
+    private TodoRepository todorepository;
 
     @Autowired
-    public Dbfiller(ToDoRepository todorepository){
+    public Dbfiller(TodoRepository todorepository){
 
         this.todorepository = todorepository;
     }
@@ -23,10 +22,10 @@ public class Dbfiller implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
         
-        ToDo t = new ToDo("Do Stuff!", false);
-        ToDo t1 = new ToDo("Do more stuff", false);
-        ToDo t2 = new ToDo("... More!", false);
-        ToDo t3 = new ToDo("Enough!", false);
+        Todo t = new Todo("Do Stuff!", false);
+        Todo t1 = new Todo("Do more stuff", false);
+        Todo t2 = new Todo("... More!", false);
+        Todo t3 = new Todo("Enough!", false);
 
         todorepository.saveAll(Arrays.asList(t, t1, t2, t3));
 

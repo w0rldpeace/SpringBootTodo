@@ -3,10 +3,21 @@ package com.springbootproject.dto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class UpdateTaskDto {
+public class TodoUpdateRequest {
 
     @NotBlank
     private String task;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @NotBlank
+    private String description;
     @NotNull
     private Long id;
     @NotNull

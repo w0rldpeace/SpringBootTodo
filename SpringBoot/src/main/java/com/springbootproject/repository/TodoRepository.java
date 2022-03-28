@@ -12,6 +12,5 @@ public interface TodoRepository extends CrudRepository<Todo, Long>{
 
     List<Todo> findByDoneTrue();
     List<Todo> findByDoneFalse();
-    Long countByDone(Boolean state);
 
 }

@@ -7,10 +7,14 @@ import com.springbootproject.entities.ToDo;
 import com.springbootproject.repository.ToDoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class ToDoServiceImpl implements ToDoService {
@@ -19,6 +23,8 @@ public class ToDoServiceImpl implements ToDoService {
     private ToDoRepository toDoRepository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private MessageSource messageSource;
 
     @Override
     public ToDo create(CreateTaskDto todo) {
@@ -31,7 +37,7 @@ public class ToDoServiceImpl implements ToDoService {
     public ToDo read(Long id) {
 
         return toDoRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Bruh!")
+                () -> new EntityNotFoundException(messageSource.getMessage("notFoundError", null, LocaleContextHolder.getLocale()))
         );
     }
 

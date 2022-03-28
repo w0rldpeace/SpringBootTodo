@@ -16,6 +16,6 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {EntityNotFoundException.class}) //EntityNotFound
     public ResponseEntity<Object> resourceNotFoundException(EntityNotFoundException ex, WebRequest request){
         System.out.println(ex.getMessage());
-        return handleExceptionInternal(ex, "Diese gibts nicht", new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+        return handleExceptionInternal(ex, "Fehler in der Konsole auslesen", new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 }

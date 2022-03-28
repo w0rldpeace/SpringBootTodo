@@ -16,7 +16,7 @@ public class Todo {
     private Long id;
 
     @Column(name="TODO_TASK", length=100, nullable=false, unique=false)
-    private String task;
+    private String description;
 
     @Column(name="DONE", nullable = false)
     private Boolean done = false;
@@ -37,16 +37,12 @@ public class Todo {
         this.id = id;
     }
 
-    public String getTask() {
-        return task;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTask(String task) {
-        this.task = task;
-    }
-
-    public Todo(String task, Boolean done){
-        this.task = task;
+    public Todo(String description, Boolean done){
+        this.description = description;
         this.done = done;
     }
 
@@ -54,5 +50,6 @@ public class Todo {
     }
 
     public void setDescription(String description) {
+        this.description = description;
     }
 }

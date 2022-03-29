@@ -61,7 +61,10 @@ class TodoControllerTest {
     }
 
     @Test
-    void getTodo() {
+    void getTodo() throws Exception{
+        when(todoService.getTodo(1L)).thenReturn(t1);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/todo/1"));
     }
 
     @Test

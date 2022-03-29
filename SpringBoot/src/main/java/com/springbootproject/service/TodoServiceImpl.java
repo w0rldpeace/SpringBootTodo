@@ -5,7 +5,6 @@ import com.springbootproject.dto.TodoUpdateRequest;
 import com.springbootproject.entities.Todo;
 import com.springbootproject.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class TodoServiceImpl implements TodoService {
@@ -21,7 +19,7 @@ public class TodoServiceImpl implements TodoService {
     @Autowired
     private final TodoRepository todoRepository;
     @Autowired
-    private MessageSource messageSource;
+    private ResourceBundleMessageSource messageSource;
 
     @Autowired
     public TodoServiceImpl(TodoRepository todoRepository){
@@ -44,9 +42,9 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public Todo getTodo(Long todoId) {
+    public Todo getTodo(long todoId) {
         return todoRepository.findById(todoId).orElseThrow(
-                () -> new EntityNotFoundException(todoId.toString())
+                () -> new EntityNotFoundException(messageSource.getMessage("notFoundError", null, LocaleContextHolder.getLocale()))
         );
     }
 

@@ -18,12 +18,11 @@ public class TodoCreationRequest {
         this.description = description;
     }
 
+    public void setDone(boolean b) {
+        this.done = b;
+    }
+
     public Boolean getDone(){
         return done;
     }
-
-    public void setDone(Boolean done){
-        this.done = done;
-    }
-
 }

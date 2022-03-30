@@ -2,11 +2,12 @@ package com.springbootproject.service;
 
 import com.springbootproject.entities.ImageEntity;
 import com.springbootproject.repository.ImageRepository;
-import com.springbootproject.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class ImageServiceImpl implements ImageService{
@@ -22,22 +23,23 @@ public class ImageServiceImpl implements ImageService{
     }
 
     @Override
-    public ImageEntity createIamge(ImageEntity image) {
-        return null;
+    public ImageEntity createImage(ImageEntity image) {
+        return this.imageRepository.save(image);
     }
 
     @Override
     public ImageEntity updateTodo(ImageEntity image) {
-        return null;
+        return this.imageRepository.save(image);
     }
 
     @Override
     public void deleteImage(Long id) {
-
+        this.imageRepository.deleteById(id);
     }
 
     @Override
     public ImageEntity getImage(Long id) {
-        return null;
+        return this.imageRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(messageSource.getMessage("notFoundError", null, LocaleContextHolder.getLocale())));
     }
 }

@@ -1,21 +1,17 @@
 package com.springbootproject.controller;
 
-import com.springbootproject.dto.ImageCreationRequest;
-import com.springbootproject.dto.TodoCreationRequest;
-import com.springbootproject.dto.TodoUpdateRequest;
 import com.springbootproject.entities.ImageEntity;
-import com.springbootproject.entities.Todo;
 import com.springbootproject.service.ImageService;
-import com.springbootproject.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/image")
@@ -35,10 +31,19 @@ public class ImageController {
         return ResponseEntity.ok(imageEntity);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createImage(@Valid @RequestBody ImageCreationRequest imageCreationRequest){
+    @GetMapping("/{id}/visible")
+    public ResponseEntity<byte[]> getVisibleImage(@PathVariable("id") Long id){
+        ImageEntity imageEntity = imageService.getImage(id);
+
+        return ResponseEntity.ok().contentType(MediaType.valueOf(imageEntity.getExtension())).body(imageEntity.getImage());
+    }
+
+    @PostMapping
+    public ResponseEntity<?> createImage(@Valid @RequestParam("image") MultipartFile imageFile) throws IOException {
         ImageEntity imageEntity = new ImageEntity();
-        imageEntity.setImage(imageCreationRequest.getImage());
+        imageEntity.setExtension(imageFile.getContentType());
+        imageEntity.setName(imageFile.getOriginalFilename());
+        imageEntity.setImage(imageFile.getBytes());
 
         ImageEntity createdImage = this.imageService.createImage(imageEntity);
 

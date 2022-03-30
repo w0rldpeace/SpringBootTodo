@@ -17,7 +17,7 @@ public class ImageEntity {
     private String name;
     @Column(name="extension", length=10, nullable=false, unique=false)
     private String extension;
-    @Column(name="image", nullable = false)
+    @Column(name="image", length=6666666, nullable = false)
     private byte[] image;
 
     public Long getId() {

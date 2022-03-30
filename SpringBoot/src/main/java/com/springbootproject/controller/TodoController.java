@@ -10,6 +10,7 @@ import com.springbootproject.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,6 +28,7 @@ public class TodoController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('TODO_GET_ALL')")
     public ResponseEntity<List<Todo>> getTodos(){
         List<Todo> todos = this.todoService.getTodos();
 
@@ -34,6 +36,7 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('TODO_GET')")
     public ResponseEntity<Todo> getTodo(@PathVariable("id") Long id){
         Todo todo = todoService.getTodo(id);
 

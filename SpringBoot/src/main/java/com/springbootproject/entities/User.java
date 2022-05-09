@@ -21,7 +21,6 @@ public class User {
     private String username;
     @NotEmpty(message = "password is required")
     private String password;
-
     @NotEmpty(message = "role is required")
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
@@ -32,6 +31,10 @@ public class User {
         this.username=username;
         this.password=password;
         this.roles = roles;
+    }
+
+    public User(){
+
     }
 
     public String getPassword() {
@@ -64,9 +67,5 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    protected User(){
-
     }
 }

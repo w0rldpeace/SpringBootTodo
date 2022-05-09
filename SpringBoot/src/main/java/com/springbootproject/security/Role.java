@@ -10,9 +10,9 @@ import static com.springbootproject.security.Permission.*;
 
 public enum Role {
 
-    USER(Set.of(TODO_READ, TODO_WRITE)),
-    ADMIN(Set.of(TODO_READ, TODO_WRITE,
-            USERS_READ, USERS_WRITE)),
+    USER(Set.of(TODO_READ, TODO_WRITE, TODO_DELETE)),
+    ADMIN(Set.of(TODO_READ, TODO_WRITE, TODO_DELETE,
+            USERS_READ, USERS_WRITE, USERS_DELETE)),
     ANALYST(Set.of(TODO_READ, TODO_WRITE, USERS_READ));
 
     private final Set<Permission> permissions;

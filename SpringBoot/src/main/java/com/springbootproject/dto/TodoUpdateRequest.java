@@ -5,9 +5,6 @@ import javax.validation.constraints.NotNull;
 
 public class TodoUpdateRequest {
 
-    @NotBlank
-    private String task;
-
     public String getDescription() {
         return description;
     }
@@ -22,16 +19,6 @@ public class TodoUpdateRequest {
     private Long id;
     @NotNull
     private Boolean done;
-
-    public String getTask() {
-
-        return task;
-    }
-
-    public void setTask(String task) {
-
-        this.task = task;
-    }
 
     public Long getId() {
         return id;

@@ -58,19 +58,18 @@ public class TodoController {
         return ResponseEntity.created(location).build();
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping
     @PreAuthorize("hasRole('todo:write')")
     public ResponseEntity<?> updateTodo(@Valid @RequestBody TodoUpdateRequest todoUpdateRequest){
-        Todo todo = new Todo();
+        Todo todo = todoService.getTodo(todoUpdateRequest.getId());
         todo.setDescription(todoUpdateRequest.getDescription());
         todo.setDone(todoUpdateRequest.getDone());
 
-        Todo updatedTodo = this.todoService.updateTodo(todo);
-
-        return ResponseEntity.ok(updatedTodo);
+        return ResponseEntity.ok(this.todoService.updateTodo(todo));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('todo:delete')")
     public ResponseEntity<?> deleteTodo(@PathVariable("id") Long id){
         this.todoService.deleteTodo(id);
         return ResponseEntity.ok().build();

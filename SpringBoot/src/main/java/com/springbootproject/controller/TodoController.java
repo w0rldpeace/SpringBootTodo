@@ -28,7 +28,7 @@ public class TodoController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('TODO_GET_ALL')")
+    @PreAuthorize("hasRole('todo:read')")
     public ResponseEntity<List<Todo>> getTodos(){
         List<Todo> todos = this.todoService.getTodos();
 
@@ -36,7 +36,7 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('TODO_GET')")
+    @PreAuthorize("hasRole('todo:read')")
     public ResponseEntity<Todo> getTodo(@PathVariable("id") Long id){
         Todo todo = todoService.getTodo(id);
 
@@ -44,6 +44,7 @@ public class TodoController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('todo:write')")
     public ResponseEntity<?> createTodo(@Valid @RequestBody TodoCreationRequest todoCreationRequest){
         Todo todo = new Todo();
         todo.setDescription(todoCreationRequest.getDescription());
@@ -58,6 +59,7 @@ public class TodoController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('todo:write')")
     public ResponseEntity<?> updateTodo(@Valid @RequestBody TodoUpdateRequest todoUpdateRequest){
         Todo todo = new Todo();
         todo.setDescription(todoUpdateRequest.getDescription());

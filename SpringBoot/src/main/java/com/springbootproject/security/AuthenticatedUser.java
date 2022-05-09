@@ -20,7 +20,7 @@ public class AuthenticatedUser extends User implements UserDetails {
         Set<GrantedAuthority> authorities = new HashSet<>();
 
         this.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role));
+            authorities.addAll(role.getGrantedAuthorities());
         });
         return authorities;
     }

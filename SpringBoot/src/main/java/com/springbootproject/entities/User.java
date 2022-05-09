@@ -1,9 +1,14 @@
 package com.springbootproject.entities;
 
+import com.springbootproject.security.Permission;
+import com.springbootproject.security.Role;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -16,12 +21,14 @@ public class User {
     private String username;
     @NotEmpty(message = "password is required")
     private String password;
+
     @NotEmpty(message = "role is required")
-    @Column
-    private List<String> roles = new ArrayList<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles = new HashSet<>();
 
 
-    public User(String username, String password, List<String> roles){
+    public User(String username, String password, Set<Role> roles){
         this.username=username;
         this.password=password;
         this.roles = roles;
@@ -51,11 +58,11 @@ public class User {
         this.id = id;
     }
 
-    public List<String> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
